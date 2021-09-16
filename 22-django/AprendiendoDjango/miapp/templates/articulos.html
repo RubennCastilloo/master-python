@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+{% block title %} Articulos de la base de datos {% endblock %}
+{% block content %}
+
+<h1>Listados de articulos</h1>
+
+{% if messages %}
+    {% for message in messages %}
+    <div class="message">
+        {{message}}
+    </div>
+    {% endfor %}
+{% endif %}
+
+<ul>
+{% for articulo in articulos%}
+<li>
+    {% if articulo.image != 'null' and articulo.image.url|length >= 1 %}
+        <img src="{{articulo.image.url}}">
+    {% endif %}
+
+    <h4>{{ articulo.id }}. {{ articulo.title }}</h4>
+    <p>{{articulo.created_at}}</p>
+    {% if articulo.public %}
+    <strong>Publicado</strong>
+    {% else %}
+    <strong>Privado</strong>
+    {% endif%}
+    <p>{{ articulo.content }}<p>
+    <a href={% url 'borrar' articulo.id%}>Borrar articulo {{articulo.id}}</a>
+</li>
+
+{% endfor %}
+</ul>
+
+
+{% endblock %}

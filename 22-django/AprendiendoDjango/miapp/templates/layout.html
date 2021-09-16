@@ -1,0 +1,69 @@
+{% load static%} <!-- Cargar archivo estatico de CSS -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title%}
+        
+        {% endblock%} | Ruben Castillo
+    </title>
+
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+
+    <!-- Cabecera de la pagina -->
+    <header>
+        <div id="logotipo">
+            <!-- Logo django -->
+            <img src="{% static 'images/logo.png'%}" alt="">
+            <h1>Sitio web con Django</h1>
+        </div>
+    </header>
+    <nav>
+        <ul>
+            <li>
+                <a href="{% url 'index'%}">Inicio</a>
+            </li>
+            <li>
+                <a href="{% url 'create' %}">Crear articulo</a>
+            </li>
+            <li>
+                <a href="{% url 'create_full' %}">Crear articulo 2</a>
+            </li>
+            <li>
+                <a href="{% url 'articulos' %}">Articulos</a>
+            </li>
+            <li>
+                <a href="{% url 'hola_mundo' %}">Hola mundo</a>
+            </li>
+            <li>
+                <a href="{% url 'pagina' %}">Pagina de pruebas</a>
+            </li>
+            <li>
+                <a href="{% url 'contacto' 'Ruben' 'Castillo' %}">Contacto</a>
+            </li>
+            <li>
+                <a href="{% url 'sesion' %}">Sesión</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div id="content">
+        <div class="box">
+            {% block content%}
+            <strong>Contenido del bloque original</strong>
+            {% endblock%}
+        </div>
+    </div>
+
+    <footer>
+        Master en Python &copy; Ruben Castillo | {% now dd/m/yy%}
+    </footer>
+
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

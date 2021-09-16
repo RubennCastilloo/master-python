@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings
 
 #Importar app con mis vistas
 # from miapp import views
@@ -29,5 +30,20 @@ urlpatterns = [
     path('pagina-pruebas/<int:redirigir>', miapp.views.pagina, name="pagina"),
     path('contacto/', miapp.views.contacto, name="contacto"),
     path('contacto/<str:nombre>', miapp.views.contacto, name="contacto"),
-    path('contacto/<str:nombre>/<str:apellidos>', miapp.views.contacto, name="contacto")
+    path('contacto/<str:nombre>/<str:apellidos>', miapp.views.contacto, name="contacto"),
+    path('sesion/', miapp.views.sesion, name="sesion"),
+    path('crear-articulo/<str:title>/<str:content>/<str:public>', miapp.views.crear_articulo, name="crear_articulo"),
+    path('articulo', miapp.views.articulo, name="articulo"),
+    path('editar-articulo/<int:id>', miapp.views.editar_articulo, name="editar_articulo"),
+    path('articulos/', miapp.views.articulos, name="articulos"),
+    path('borrar-articulo/<int:id>', miapp.views.borrar_articulo, name="borrar"),
+    path('save-article/', miapp.views.save_article, name="save"),
+    path('create-article/', miapp.views.create_article, name="create"),
+    path('create-full-article/', miapp.views.create_full_article, name="create_full")
 ]
+
+# Configuración para cargar imágenes
+
+if settings.DEBUG:
+    from django.conf.urls.static import static
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
